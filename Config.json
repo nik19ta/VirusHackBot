@@ -1,0 +1,9 @@
+{
+  "vk-login": "89646997211",
+  "vk-token": "ce3f07e7e2bd334a5e8e38fd1d394caa654d3a951518bfa0deddd2c68c203b885664ddd8b392b1420478e",
+  "telegram-token": "1215596241:AAHDcsR7Lw2Xdqh0EfiMh6IHoo5vFWsSnuM",
+  "proxy": {
+    "http":"http://177.87.39.104:3128",
+    "https":"https://177.87.39.104:3128"
+  }
+}
