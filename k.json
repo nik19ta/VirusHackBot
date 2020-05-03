@@ -1,0 +1,25 @@
+{
+  "one_time": false,
+  "buttons": [
+    [{
+      "action": {
+        "type": "text",
+        "label": "По странам"
+      },
+      "color": "default"
+    },{
+      "action": {
+        "type": "text",
+        "label": "Общая статистика"
+      },
+      "color": "default"
+    }],
+  [{
+    "action": {
+      "type": "text",
+      "label": "В главное меню"
+    },
+    "color": "negative"
+  }]
+  ]
+}
