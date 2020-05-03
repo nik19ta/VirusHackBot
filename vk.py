@@ -38,14 +38,27 @@ for event in longpoll.listen():
             vk.messages.send(
                 keyboard=open('k.json',"r",encoding="UTF-8").read(),
                 user_id=event.user_id,
-                message=data.getLocations(),
+                message=data.latest(),
                 random_id=get_random_id())
 
         elif event.text == 'Общая статистика':
             vk.messages.send(
                 keyboard=open('k.json',"r",encoding="UTF-8").read(),
                 user_id=event.user_id,
+                message=data.latest(),
+                random_id=get_random_id())
+
+        elif event.text == 'По странам':
+            vk.messages.send(
+                keyboard=open('k.json',"r",encoding="UTF-8").read(),
+                user_id=event.user_id,
                 message=data.getLocations(),
+                random_id=get_random_id())
+
+        elif event.text == 'В главное меню':
+            vk.messages.send(
+                keyboard=open('k.json',"r",encoding="UTF-8").read(),
+                user_id=event.user_id,
                 random_id=get_random_id())
 
         elif event.text == 'Пройти тест':
