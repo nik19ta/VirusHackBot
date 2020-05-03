@@ -45,7 +45,7 @@ for event in longpoll.listen():
             vk.messages.send(
                 keyboard=open('k.json',"r",encoding="UTF-8").read(),
                 user_id=event.user_id,
-                message=data.latest(),
+                message=data.getLocations(),
                 random_id=get_random_id())
 
         elif event.text == 'Пройти тест':
