@@ -99,7 +99,7 @@ for event in longpoll.listen():
             dataT[0].append(0)
             vk.messages.send(
             user_id=event.user_id,
-            message=str('Вероятность того, что вы зараженны короновирусом '  + str(predict_corona(test) * 100)[1] + str(predict_corona(test) * 100)[2] + ' %'),
+            message=getdata(),
             random_id=get_random_id())
             print('end')
         else:
@@ -159,4 +159,12 @@ for event in longpoll.listen():
                         print(dataT)
 
 
+
                     # print(predict_corona(test))
+def getdata():
+    p = predict_corona(dataT)
+
+    if int(str(p * 100)[1] + str(p * 100)[2]) > 0  :
+        return str('Вероятность того, что вы зараженны короновирусом '  + str(p * 100)[1] + str(p * 100)[2] + ' %')
+    else:
+        return str('Вероятность того того что вы больны очень мала')
