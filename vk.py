@@ -6,6 +6,9 @@ from vk_api.utils import get_random_id
 import json
 import data
 from questions import M
+from recommendation import rec
+from virushack_corona import predict_corona
+import random
 
 with open("Config.json", "r") as read_file:
     config = json.load(read_file)
@@ -16,6 +19,8 @@ keyboard = VkKeyboard(one_time=False)
 
 keyboard.add_button('Актуальные данные', color=VkKeyboardColor.POSITIVE)
 keyboard.add_button('Пройти тест', color=VkKeyboardColor.DEFAULT)
+keyboard.add_line()
+keyboard.add_button('Рекомендации по короновирусу', color=VkKeyboardColor.DEFAULT)
 
 
 session = requests.Session()
@@ -27,6 +32,8 @@ vk = vk_session.get_api()
 
 isTest = False
 step = 0
+progress = 0;
+dataT = [[]]
 
 for event in longpoll.listen():
 
@@ -45,6 +52,13 @@ for event in longpoll.listen():
                 keyboard=open('k.json',"r",encoding="UTF-8").read(),
                 user_id=event.user_id,
                 message=data.latest(),
+                random_id=get_random_id())
+
+        elif event.text == 'Рекомендации по короновирусу':
+            vk.messages.send(
+                keyboard=keyboard.get_keyboard(),
+                user_id=event.user_id,
+                message=str(rec[random.randint(0,6)]),
                 random_id=get_random_id())
 
         elif event.text == 'Общая статистика':
@@ -70,8 +84,6 @@ for event in longpoll.listen():
 
         elif event.text == 'Пройти тест':
             isTest = True;
-
-
         else:
             vk.messages.send(
                 keyboard=keyboard.get_keyboard(),
@@ -80,11 +92,71 @@ for event in longpoll.listen():
                 random_id=get_random_id())
 
     if event.type == VkEventType.MESSAGE_NEW and event.to_me and event.text and isTest == True:
+
         step = step + 1
-
-
-        vk.messages.send(
-            keyboard=keyboard.get_keyboard(),
+        if step > 54:
+            print(dataT)
+            dataT[0].append(0)
+            vk.messages.send(
             user_id=event.user_id,
-            message=str(M[step - 1]),
+            message=str('Вероятность того, что вы зараженны короновирусом '  + str(predict_corona(test) * 100)[1] + str(predict_corona(test) * 100)[2] + ' %'),
             random_id=get_random_id())
+            print('end')
+        else:
+            if event.text:
+                if event.text == 'Пройти тест':
+                    # continue
+                    # dataT[0].append(1)
+                    vk.messages.send(
+                    keyboard=open('gender.json',"r",encoding="UTF-8").read(),
+                    user_id=event.user_id,
+                    message=str(M[step - 1]),
+                    random_id=get_random_id())
+                    print(dataT)
+
+                elif progress == 0:
+                    if event.text == 'Мужской':
+                        dataT[0].append(1)
+                        vk.messages.send(
+                        user_id=event.user_id,
+                        message=str(M[step - 1]),
+                        random_id=get_random_id())
+                        progress = progress + 1
+                        print(dataT)
+                    else:
+                        dataT[0].append(0)
+                        vk.messages.send(
+                        user_id=event.user_id,
+                        message=str(M[step - 1]),
+                        random_id=get_random_id())
+                        progress = progress + 1
+                        print(dataT)
+                elif progress == 1:
+                    dataT[0].append(event.text)
+                    vk.messages.send(
+                    keyboard=open('test.json',"r",encoding="UTF-8").read(),
+                    user_id=event.user_id,
+                    message=str(M[step - 1]),
+                    random_id=get_random_id())
+                    progress = progress + 1
+                    print(dataT)
+                elif progress == 2:
+                    if event.text == 'Да':
+                        dataT[0].append(1)
+                        vk.messages.send(
+                        keyboard=open('test.json',"r",encoding="UTF-8").read(),
+                        user_id=event.user_id,
+                        message=str(M[step - 1]),
+                        random_id=get_random_id())
+                        print(dataT)
+                    else:
+                        dataT[0].append(0)
+                        vk.messages.send(
+                        keyboard=open('test.json',"r",encoding="UTF-8").read(),
+                        user_id=event.user_id,
+                        message=str(M[step - 1]),
+                        random_id=get_random_id())
+                        print(dataT)
+
+
+                    # print(predict_corona(test))
