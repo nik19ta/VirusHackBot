@@ -1,0 +1,58 @@
+
+ 0   gender
+ 1   age
+ 2   hosp_visit
+ 3   death
+ 4   recovered
+ 5   symptom
+ 6   abdominal pain
+ 7   diarrhea
+ 8   breathlessness
+ 9   reflux
+ 10  shortness of breath
+ 11  myalgias
+ 12  high fever
+ 13  aching muscles
+ 14  loss of appetite
+ 15  nausea
+ 16  headache
+ 17  difficulty breathing
+ 18  flu symptoms
+ 19  chest pain
+ 20  malaise
+ 21  nasal discharge
+ 22  chill
+ 23  flu
+ 24  fever
+ 25  chills
+ 26  muscle cramps
+ 27  sore body
+ 28  chest discomfort
+ 29  fatigue
+ 30  vomiting
+ 31  runny nose
+ 32  heavy head
+ 33  throat pain
+ 34  dyspnea
+ 35  joint pain
+ 36  mild cough
+ 37  itchy throat
+ 38  throat discomfort
+ 39  muscle aches
+ 40  sore throat
+ 41  physical discomfort
+ 42  coughing
+ 43  myalgia
+ 44  tired
+ 45  difficult in breathing
+ 46  cough
+ 47  respiratory distress
+ 48  cough with sputum
+ 49  muscle pain
+ 50  sputum
+ 51  thirst
+ 52  cold
+ 53  feaver
+ 54  mild fever
+ 55  pneumonia
+ 56  sneeze
